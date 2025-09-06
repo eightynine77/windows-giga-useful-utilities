@@ -4,4 +4,15 @@ if "%~1"=="" (
     exit /b
 )
 
-taskkill /f /im "%~1".exe
+set "proc=%~1"
+
+if /i "%proc:~-4%"==".exe" (
+    set "target=%proc%"
+) else (
+    set "target=%proc%.exe"
+)
+
+taskkill /f /im "%target%"
+echo.
+echo press any key to close this script...
+pause >nul
